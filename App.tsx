@@ -70,7 +70,7 @@ const App: React.FC = () => {
   const currentArtisan = allArtisans.find(a => a.id === selectedArtisanId);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#cab89d] selection:bg-[#7B4A2E] selection:text-white">
+    <div className="min-h-screen flex flex-col bg-gaatha-bg selection:bg-gaatha-accent selection:text-white overflow-x-hidden">
       <Navbar 
         onNavigate={handleNavigate} 
         currentPage={currentPage} 
@@ -116,6 +116,8 @@ const App: React.FC = () => {
             onExploreArtisans={handleExploreArtisans}
             onArtisanSelect={handleArtisanSelect}
             artisans={allArtisans.filter(a => a.status === 'live')}
+            allArtForms={ART_FORMS}
+            onArtFormSelect={handleArtFormSelect}
           />
         )}
 

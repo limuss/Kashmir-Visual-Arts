@@ -15,7 +15,7 @@ const ArtisanDetailPage: React.FC<ArtisanDetailPageProps> = ({ artisan, onBack }
   const liveArtworks = artisan.artworks?.filter(aw => aw.status === 'live') || [];
 
   return (
-    <div className="bg-[#cab89d] min-h-screen">
+    <div className="bg-gaatha-bg min-h-screen">
       <Hero 
         title={artisan.name}
         subtitle={artisan.role}
@@ -28,13 +28,13 @@ const ArtisanDetailPage: React.FC<ArtisanDetailPageProps> = ({ artisan, onBack }
           {/* Main Info */}
           <div className="md:w-2/3">
             <div className="mb-12">
-              <span className="text-xs font-bold tracking-[0.2em] text-[#7B4A2E] uppercase mb-4 block">The Master Artisan</span>
-              <h2 className="text-4xl md:text-5xl font-playfair text-[#3E2D1F] mb-6">A Journey of {artisan.experience}</h2>
-              <div className="w-20 h-1 bg-[#7B4A2E] mb-8" />
-              <p className="text-xl font-lora text-[#4B3827] leading-relaxed italic mb-8">
+              <span className="text-xs font-bold tracking-[0.2em] text-gaatha-accent uppercase mb-4 block">The Master Artisan</span>
+              <h2 className="text-4xl md:text-5xl font-playfair text-gaatha-ink mb-6">A Journey of {artisan.experience}</h2>
+              <div className="w-20 h-1 bg-gaatha-accent mb-8" />
+              <p className="text-xl font-lora text-gaatha-ink leading-relaxed italic mb-8">
                 "{artisan.bio}"
               </p>
-              <div className="space-y-6 text-lg text-[#5A4632] leading-relaxed">
+              <div className="space-y-6 text-lg text-gaatha-muted leading-relaxed">
                 <p>
                   Rooted in the ancient valleys of Kashmir, {artisan.name} represents a lineage of excellence. 
                   Every piece created in their workshop is a dialogue between history and hand, 
@@ -48,13 +48,13 @@ const ArtisanDetailPage: React.FC<ArtisanDetailPageProps> = ({ artisan, onBack }
             </div>
 
             {artisan.specialties && (
-              <div className="mt-12 bg-[#F2E6D8] p-8 md:p-10 shadow-md">
-                <h3 className="text-2xl font-playfair text-[#3E2D1F] mb-6">Specialties & Techniques</h3>
+              <div className="mt-12 bg-gaatha-paper p-8 md:p-10 shadow-md border border-gaatha-line">
+                <h3 className="text-2xl font-playfair text-gaatha-ink mb-6">Specialties & Techniques</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {artisan.specialties.map((spec, i) => (
                     <div key={i} className="flex items-center gap-3">
-                      <div className="w-2 h-2 rounded-full bg-[#7B4A2E]" />
-                      <span className="text-[#5A4632] font-medium">{spec}</span>
+                      <div className="w-2 h-2 rounded-full bg-gaatha-accent" />
+                      <span className="text-gaatha-muted font-medium">{spec}</span>
                     </div>
                   ))}
                 </div>
@@ -64,28 +64,28 @@ const ArtisanDetailPage: React.FC<ArtisanDetailPageProps> = ({ artisan, onBack }
 
           {/* Sidebar / Profile Meta */}
           <div className="md:w-1/3 space-y-8">
-            <div className="bg-[#4B3827] text-[#F5F1EA] p-8 shadow-xl">
-              <h3 className="text-xl font-playfair mb-6 border-b border-[#F5F1EA]/20 pb-4">Artisan Credentials</h3>
+            <div className="bg-gaatha-ink text-gaatha-bg p-8 shadow-xl">
+              <h3 className="text-xl font-playfair mb-6 border-b border-gaatha-bg/20 pb-4">Artisan Credentials</h3>
               <div className="space-y-4">
                 <div>
-                  <p className="text-xs text-[#E2D7C6] uppercase tracking-widest opacity-60 mb-1">Current Role</p>
+                  <p className="text-xs text-gaatha-bg/60 uppercase tracking-widest mb-1">Current Role</p>
                   <p className="text-lg">{artisan.role}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-[#E2D7C6] uppercase tracking-widest opacity-60 mb-1">Years in Practice</p>
+                  <p className="text-xs text-gaatha-bg/60 uppercase tracking-widest mb-1">Years in Practice</p>
                   <p className="text-lg">{artisan.experience}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-[#E2D7C6] uppercase tracking-widest opacity-60 mb-1">Region</p>
+                  <p className="text-xs text-gaatha-bg/60 uppercase tracking-widest mb-1">Region</p>
                   <p className="text-lg">{artisan.location}, Kashmir</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white/40 p-8 border border-white/50">
-              <h4 className="font-bold text-[#3E2D1F] mb-3">Support this Artisan</h4>
-              <p className="text-sm text-[#7a6041] mb-6">Connect directly with the workshop for custom commissions or heritage acquisitions.</p>
-              <button className="w-full py-3 bg-[#7B4A2E] text-white hover:bg-[#5C331E] transition-colors text-sm font-bold tracking-widest uppercase">
+            <div className="bg-gaatha-paper/40 p-8 border border-gaatha-line">
+              <h4 className="font-bold text-gaatha-ink mb-3">Support this Artisan</h4>
+              <p className="text-sm text-gaatha-muted mb-6">Connect directly with the workshop for custom commissions or heritage acquisitions.</p>
+              <button className="w-full py-3 bg-gaatha-accent text-white hover:bg-gaatha-red transition-colors text-sm font-bold tracking-widest uppercase">
                 Send Inquiry
               </button>
             </div>
@@ -95,34 +95,34 @@ const ArtisanDetailPage: React.FC<ArtisanDetailPageProps> = ({ artisan, onBack }
         {/* --- SECTION: Artisan's Gallery --- */}
         <section className="mt-24 md:mt-32">
           <div className="flex flex-col mb-12">
-             <span className="text-xs font-bold tracking-[0.3em] text-[#7B4A2E] uppercase mb-4">Original Works</span>
-             <h2 className="text-4xl md:text-5xl font-playfair text-[#3E2D1F] mb-6">{artisan.name}'s Art</h2>
-             <div className="w-24 h-1 bg-[#4B3827]" />
+             <span className="text-xs font-bold tracking-[0.3em] text-gaatha-accent uppercase mb-4">Original Works</span>
+             <h2 className="text-4xl md:text-5xl font-playfair text-gaatha-ink mb-6">{artisan.name}'s Art</h2>
+             <div className="w-24 h-1 bg-gaatha-ink" />
           </div>
 
           {liveArtworks.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
               {liveArtworks.map((artwork) => (
-                <div key={artwork.id} className="bg-[#F2E6D8] border border-[#D6C7B2] shadow-sm flex flex-col group overflow-hidden active:scale-[0.99] transition-all">
+                <div key={artwork.id} className="bg-gaatha-paper border border-gaatha-line shadow-sm flex flex-col group overflow-hidden active:scale-[0.99] transition-all">
                   <div className="h-72 overflow-hidden relative">
                     <img 
                       src={artwork.image} 
                       alt={artwork.title} 
                       className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
                     />
-                    <div className="absolute top-4 right-4 bg-[#7B4A2E] text-white px-3 py-1 text-sm font-bold font-lora shadow-md">
+                    <div className="absolute top-4 right-4 bg-gaatha-accent text-white px-3 py-1 text-sm font-bold font-lora shadow-md">
                       {artwork.price}
                     </div>
                   </div>
                   <div className="p-6 flex flex-col flex-grow">
-                    <h3 className="text-2xl font-playfair text-[#3E2D1F] mb-3">{artwork.title}</h3>
-                    <p className="text-sm text-[#5A4632] font-lora leading-relaxed mb-6 italic flex-grow">
+                    <h3 className="text-2xl font-playfair text-gaatha-ink mb-3">{artwork.title}</h3>
+                    <p className="text-sm text-gaatha-muted font-lora leading-relaxed mb-6 italic flex-grow">
                       {artwork.description}
                     </p>
-                    <button className="w-full py-3 bg-[#3E2D1F] text-[#F5F1EA] text-xs font-bold uppercase tracking-widest hover:bg-black transition-all shadow-sm">
+                    <button className="w-full py-3 bg-gaatha-ink text-gaatha-bg text-xs font-bold uppercase tracking-widest hover:bg-black transition-all shadow-sm">
                       Purchase this Artwork
                     </button>
-                    <button className="w-full mt-2 py-2 text-[#4B3827] text-[10px] font-bold uppercase tracking-widest hover:underline">
+                    <button className="w-full mt-2 py-2 text-gaatha-ink text-[10px] font-bold uppercase tracking-widest hover:underline">
                       View full details
                     </button>
                   </div>
@@ -130,19 +130,19 @@ const ArtisanDetailPage: React.FC<ArtisanDetailPageProps> = ({ artisan, onBack }
               ))}
             </div>
           ) : (
-            <div className="py-20 text-center bg-white/30 border border-dashed border-[#D6C7B2] rounded-sm">
-               <p className="font-lora italic text-[#8A7660]">This artisan's digital catalog is currently being updated. Check back soon to view and acquire new works.</p>
+            <div className="py-20 text-center bg-gaatha-paper/30 border border-dashed border-gaatha-line rounded-sm">
+               <p className="font-lora italic text-gaatha-muted">This artisan's digital catalog is currently being updated. Check back soon to view and acquire new works.</p>
             </div>
           )}
         </section>
 
-        <div className="mt-20 pt-10 border-t border-[#D6C7B2] flex justify-center">
+        <div className="mt-20 pt-10 border-t border-gaatha-line flex justify-center">
           <button 
             onClick={onBack}
-            className="group flex items-center gap-3 text-[#7B4A2E] font-bold hover:text-[#3E2D1F] transition-all"
+            className="group flex items-center gap-3 text-gaatha-accent font-bold hover:text-gaatha-ink transition-all"
           >
             <span className="text-xl transform group-hover:-translate-x-1 transition-transform">←</span>
-            <span className="border-b border-transparent group-hover:border-[#3E2D1F] pb-1">Return to Archive</span>
+            <span className="border-b border-transparent group-hover:border-gaatha-ink pb-1">Return to Archive</span>
           </button>
         </div>
       </main>

@@ -1,8 +1,8 @@
 
 import React from 'react';
 import Hero from '../components/Hero';
-import { ART_FORMS } from '../constants';
-import { ArtForm, Artisan } from '../types';
+import { ART_FORMS, STORIES } from '../constants';
+import { ArtForm, Artisan, Story } from '../types';
 
 interface HomePageProps {
   onArtFormSelect: (id: string) => void;
@@ -12,119 +12,152 @@ interface HomePageProps {
 
 const HomePage: React.FC<HomePageProps> = ({ onArtFormSelect, onArtisanSelect, artisans }) => {
   return (
-    <div className="bg-[#cab89d]">
+    <div className="bg-gaatha-bg">
       <Hero 
-        title="Kashmiri Visual Arts"
-        subtitle="An archive documenting traditional visual art forms, their processes, and the artisans who keep them alive."
-        image="https://images.unsplash.com/photo-1590004953392-5aba2e72269a?q=80&w=1440&auto=format&fit=crop"
+        title="The Living Archive of Kashmir"
+        subtitle="Documenting the heritage, the hands, and the stories behind the valley's timeless crafts."
+        image="https://www.khyberhotels.com/public/uploads/Resort/71fae7fd378c4af57bf26f1e2c77b2da.jpg"
       />
 
-      {/* Explore Art Forms Section */}
-      <section className="py-12 md:py-20 max-w-[1440px] mx-auto px-4 md:px-20">
-        <div className="flex items-center gap-4 md:gap-5 mb-8 md:mb-12">
-          <h2 className="text-2xl md:text-4xl font-normal text-[#3E2D1F] whitespace-nowrap font-playfair">Explore Art Forms</h2>
-          <div className="flex-grow h-[1px] bg-[#5A4632]/30" />
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {ART_FORMS.map((form: ArtForm) => (
-            <div 
-              key={form.id}
-              onClick={() => onArtFormSelect(form.id)}
-              className="bg-[#F2E6D8] border border-[#D6C7B2] flex flex-col shadow-sm active:scale-[0.98] md:hover:-translate-y-1 md:hover:shadow-xl transition-all cursor-pointer group rounded-sm overflow-hidden"
-            >
-              <div className="overflow-hidden h-44 md:h-48">
-                <img 
-                  src={form.image} 
-                  alt={form.name} 
-                  className="w-full h-full object-cover md:group-hover:scale-110 transition-transform duration-700"
-                />
-              </div>
-              <div className="p-5">
-                <h3 className="text-xl font-semibold text-[#4B3827] mb-2 tracking-wide font-playfair">{form.name}</h3>
-                <div className="w-12 h-[1px] bg-[#4B3827]/40 mb-3" />
-                <p className="text-sm text-[#7a6041] font-medium leading-relaxed font-lora line-clamp-2">{form.shortDescription}</p>
-              </div>
+      {/* Crafts Section (Gaatha Style) */}
+      <section className="py-12 md:py-24 bg-gaatha-paper">
+        <div className="gaatha-container">
+          <div className="flex justify-between items-end mb-10 md:mb-16">
+            <div>
+              <span className="text-gaatha-accent font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs mb-4 block">Exploration</span>
+              <h2 className="text-3xl md:text-5xl font-normal text-gaatha-ink font-playfair leading-tight">The Crafts</h2>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Enhanced Featured Artisans Section */}
-      <section className="py-12 md:py-20 bg-[#c4b194]">
-        <div className="max-w-[1440px] mx-auto px-4 md:px-20">
-          <div className="flex flex-col mb-10 text-center md:text-left">
-            <h2 className="text-3xl md:text-4xl font-normal text-[#3E2D1F] mb-1 font-playfair">Featured Artisans</h2>
-            <h3 className="text-lg md:text-2xl font-normal text-[#6b5a48] mb-4 font-lora italic">The Keepers of Heritage</h3>
-            <div className="w-24 md:w-32 h-1 bg-[#5A4632] mx-auto md:mx-0" />
+            <button 
+              onClick={() => onArtFormSelect('explore')}
+              className="hidden md:block text-xs font-bold uppercase tracking-[0.2em] text-gaatha-ink hover:text-gaatha-accent transition-colors border-b border-gaatha-ink/20 pb-1"
+            >
+              View All Crafts
+            </button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {artisans.slice(0, 4).map((artisan: Artisan) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+            {ART_FORMS.map((form: ArtForm) => (
               <div 
-                key={artisan.id} 
-                onClick={() => { if(window.innerWidth < 768) onArtisanSelect(artisan.id) }}
-                className="relative bg-[#F2E6D8] border border-[#D6C7B2] flex flex-col group overflow-hidden shadow-lg h-[450px] rounded-sm cursor-pointer"
+                key={form.id}
+                onClick={() => onArtFormSelect(form.id)}
+                className="group cursor-pointer"
               >
-                {/* Artisan Image */}
-                <div className="h-full w-full">
+                <div className="relative overflow-hidden mb-6 aspect-square">
                   <img 
-                    src={artisan.image} 
-                    alt={artisan.name} 
-                    className="w-full h-full object-cover transition-transform duration-1000 md:group-hover:scale-105"
+                    src={form.image} 
+                    alt={form.name} 
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   />
+                  <div className="absolute inset-0 bg-gaatha-ink/20 group-hover:bg-gaatha-ink/0 transition-all duration-500" />
                 </div>
-
-                {/* Mobile/Default Info Bar */}
-                <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/95 via-black/60 to-transparent p-6 transition-transform duration-500 md:group-hover:translate-y-full">
-                   <h4 className="text-2xl font-normal text-[#F5F1EA] mb-1 font-playfair">{artisan.name}</h4>
-                   <p className="text-sm text-[#E2D7C6] italic font-lora mb-3">{artisan.role}</p>
-                   <div className="md:hidden mt-2 pt-2 border-t border-white/20">
-                      <span className="text-[10px] text-white/70 uppercase tracking-[0.2em] font-bold">Tap to View Profile</span>
-                   </div>
-                </div>
-
-                {/* Desktop Hover Reveal Details */}
-                <div className="hidden md:flex absolute inset-0 bg-[#3E2D1F]/90 backdrop-blur-[4px] opacity-0 group-hover:opacity-100 transition-all duration-500 p-8 flex-col justify-center items-center text-center">
-                  <h4 className="text-3xl font-normal text-[#F5F1EA] mb-2 font-playfair transform translate-y-4 opacity-0 transition-all duration-500 delay-75 group-hover:translate-y-0 group-hover:opacity-100">
-                    {artisan.name}
-                  </h4>
-                  <p className="text-[#D6C7B2] font-semibold mb-4 tracking-[0.1em] uppercase text-xs font-lora transform translate-y-4 opacity-0 transition-all duration-500 delay-100 group-hover:translate-y-0 group-hover:opacity-100">
-                    {artisan.role}
-                  </p>
-                  <div className="w-16 h-[1px] bg-[#D6C7B2]/40 mb-6 transform scale-x-0 transition-transform duration-500 delay-150 group-hover:scale-x-100" />
-                  
-                  <p className="text-base text-[#E2D7C6] leading-relaxed mb-6 font-lora italic px-4 transform translate-y-4 opacity-0 transition-all duration-500 delay-200 group-hover:translate-y-0 group-hover:opacity-100">
-                    "{artisan.bio}"
-                  </p>
-                  
-                  <div className="text-[10px] text-[#8A7660] mb-8 uppercase tracking-[0.2em] font-bold transform translate-y-4 opacity-0 transition-all duration-500 delay-300 group-hover:translate-y-0 group-hover:opacity-100">
-                    {artisan.experience}
-                  </div>
-                  
-                  <button 
-                    onClick={(e) => { e.stopPropagation(); onArtisanSelect(artisan.id); }}
-                    className="px-8 py-3 border-2 border-[#F5F1EA] text-[#F5F1EA] hover:bg-[#F5F1EA] hover:text-[#3E2D1F] transition-all duration-700 delay-[400ms] opacity-0 transform translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 text-sm tracking-widest uppercase font-bold active:scale-95"
-                  >
-                    View Full Profile
-                  </button>
-                </div>
+                <h3 className="text-2xl font-normal text-gaatha-ink mb-2 font-playfair text-center group-hover:text-gaatha-accent transition-colors">
+                  {form.name}
+                </h3>
+                <p className="text-gaatha-ink/60 font-lora text-xs uppercase tracking-widest text-center">
+                  Documentation & Research
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 max-w-[1440px] mx-auto px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-normal text-[#3E2D1F] mb-8 font-playfair">About the Archive</h2>
-          <p className="text-lg md:text-xl text-[#7a6041] leading-loose mb-12 font-lora italic px-4">
-            "A living record of Srinagar's artistic soul. We document not just the artifacts, but the hands that shape them and the stories they tell."
+      {/* People Section (Gaatha Style) */}
+      <section className="py-12 md:py-24 gaatha-container">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+          <div className="relative">
+            <div className="aspect-[3/4] overflow-hidden shadow-xl">
+              <img 
+                src="https://idsb.tmgrup.com.tr/ly/uploads/images/2021/11/03/142345.jpg" 
+                alt="Artisan at work" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-10 -right-10 hidden lg:block w-64 h-64 border-8 border-gaatha-bg bg-gaatha-paper p-8 shadow-2xl">
+              <p className="text-gaatha-ink font-lora italic text-lg leading-relaxed">
+                "Every stroke is a prayer, every pattern a memory of our ancestors."
+              </p>
+              <div className="mt-4 text-gaatha-accent font-bold tracking-widest uppercase text-[10px]">
+                — Master Artisan
+              </div>
+            </div>
+          </div>
+          
+          <div className="pt-8 lg:pt-0">
+            <span className="text-gaatha-accent font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs mb-4 block">The People</span>
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-normal text-gaatha-ink font-playfair mb-6 md:mb-8 leading-tight">
+              Meet the Keepers of Heritage
+            </h2>
+            <p className="text-gaatha-ink/70 font-lora text-base md:text-lg leading-loose mb-10">
+              Our archive is more than just a collection of objects. It is a tribute to the resilient spirits of the valley—the artisans who have carried these traditions through centuries of change.
+            </p>
+            <div className="grid grid-cols-2 gap-6 md:gap-8 mb-12">
+              {artisans.slice(0, 2).map(artisan => (
+                <div key={artisan.id} className="group cursor-pointer" onClick={() => onArtisanSelect(artisan.id)}>
+                  <div className="aspect-square overflow-hidden mb-4 rounded-full border border-gaatha-line p-1">
+                    <img src={artisan.image} alt={artisan.name} className="w-full h-full object-cover rounded-full grayscale group-hover:grayscale-0 transition-all duration-700" />
+                  </div>
+                  <h4 className="text-gaatha-ink font-playfair text-base md:text-lg text-center group-hover:text-gaatha-accent transition-colors">{artisan.name}</h4>
+                </div>
+              ))}
+            </div>
+            <button 
+              onClick={() => onArtisanSelect('artists')}
+              className="w-full sm:w-auto px-10 py-5 bg-gaatha-ink text-white text-[10px] md:text-xs font-bold uppercase tracking-widest hover:bg-gaatha-accent transition-all shadow-xl"
+            >
+              Explore All Artisans
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Stories Section (Gaatha Style) */}
+      <section className="py-20 md:py-32 gaatha-container border-t border-gaatha-line/30">
+        <div className="flex flex-col items-center mb-12 md:mb-16">
+          <span className="text-gaatha-accent font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs mb-4">The Archive</span>
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-normal text-gaatha-ink font-playfair text-center">Featured Stories</h2>
+          <div className="w-12 h-[2px] bg-gaatha-accent mt-6" />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+          {STORIES.map((story: Story) => (
+            <div key={story.id} className="group cursor-pointer">
+              <div className="relative overflow-hidden mb-6 aspect-[4/3]">
+                <img 
+                  src={story.image} 
+                  alt={story.title} 
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                />
+                <div className="absolute top-4 left-4 bg-white/90 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-gaatha-ink">
+                  {story.category}
+                </div>
+              </div>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="h-[1px] w-8 bg-gaatha-accent" />
+                <span className="text-[10px] font-bold text-gaatha-muted uppercase tracking-widest">{story.date}</span>
+              </div>
+              <h3 className="text-2xl font-normal text-gaatha-ink mb-4 font-playfair leading-tight group-hover:text-gaatha-accent transition-colors">
+                {story.title}
+              </h3>
+              <p className="text-gaatha-ink/70 font-lora text-sm leading-relaxed line-clamp-3">
+                {story.excerpt}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* About Section (Gaatha Style) */}
+      <section className="py-24 bg-gaatha-ink text-gaatha-bg">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <span className="text-gaatha-accent font-bold tracking-[0.4em] uppercase text-[10px] mb-8 block">Our Mission</span>
+          <h2 className="text-3xl md:text-5xl font-normal font-playfair mb-10 leading-relaxed italic">
+            "To preserve the visual vocabulary of Kashmir, ensuring that the whispers of the past remain audible to the future."
+          </h2>
+          <div className="w-20 h-[1px] bg-gaatha-bg/20 mx-auto mb-10" />
+          <p className="text-gaatha-bg/60 font-lora text-lg leading-loose max-w-2xl mx-auto">
+            The Kashmiri Visual Arts Archive is a collaborative effort to document, research, and celebrate the rich artistic traditions of the valley.
           </p>
-          <button className="bg-[#7B4A2E] hover:bg-[#5C331E] text-[#F4EDE4] px-12 py-4 rounded-sm transition-all hover:shadow-2xl text-lg tracking-widest shadow-xl w-full sm:w-auto font-bold uppercase">
-            Learn More
-          </button>
         </div>
       </section>
     </div>

@@ -20,54 +20,54 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, user, onLogout
   };
 
   return (
-    <header className="bg-[#cab89d] border-b border-[#4B3827]/20 py-5 sticky top-0 z-50">
-      <div className="max-w-[1440px] mx-auto px-6 md:px-20 flex justify-between items-center">
+    <header className="bg-gaatha-bg/80 backdrop-blur-md border-b border-gaatha-line py-4 md:py-6 sticky top-0 z-50">
+      <div className="gaatha-container flex justify-between items-center">
         {/* Brand Section */}
         <div 
-          className="text-2xl font-playfair font-bold text-[#3E2D1F] cursor-pointer flex items-center"
+          className="cursor-pointer flex flex-col mr-2 md:mr-8"
           onClick={() => handleLinkClick('home')}
         >
-          Kashmiri Visual Arts
+          <span className="text-lg md:text-xl lg:text-2xl xl:text-3xl font-playfair font-normal text-gaatha-ink tracking-tight whitespace-nowrap leading-none mb-1">
+            Kashmiri Visual Arts
+          </span>
+          <span className="text-[7px] md:text-[8px] lg:text-[9px] font-bold uppercase tracking-[0.3em] lg:tracking-[0.4em] text-gaatha-accent ml-0.5">
+            The Archive
+          </span>
         </div>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          <button 
-            onClick={() => handleLinkClick('art-forms')}
-            className={`text-sm font-bold uppercase tracking-widest transition-colors ${
-              currentPage === 'art-forms' ? 'text-[#3E2D1F] border-b-2 border-[#7B4A2E]' : 'text-[#8A7660] hover:text-[#3E2D1F]'
-            }`}
-          >
-            Art Forms
-          </button>
+        <nav className="hidden lg:flex items-center gap-4 xl:gap-10">
+          {['home', 'art-forms', 'artists', 'explore'].map((page) => (
+            <button 
+              key={page}
+              onClick={() => handleLinkClick(page)}
+              className={`text-[9px] xl:text-[11px] font-bold uppercase tracking-[0.2em] xl:tracking-[0.25em] transition-all duration-300 relative group ${
+                currentPage === page ? 'text-gaatha-accent' : 'text-gaatha-ink/60 hover:text-gaatha-ink'
+              }`}
+            >
+              {page.replace('-', ' ')}
+              <span className={`absolute -bottom-2 left-0 w-full h-[1px] bg-gaatha-accent transition-transform duration-300 origin-left ${
+                currentPage === page ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+              }`} />
+            </button>
+          ))}
           
-          <button 
-            onClick={() => handleLinkClick('artists')}
-            className={`text-sm font-bold uppercase tracking-widest transition-colors ${
-              currentPage === 'artists' ? 'text-[#3E2D1F] border-b-2 border-[#7B4A2E]' : 'text-[#8A7660] hover:text-[#3E2D1F]'
-            }`}
-          >
-            Artists
-          </button>
-          
-          <div className="h-6 w-[1px] bg-[#4B3827]/20 mx-2" />
+          <div className="h-4 w-[1px] bg-gaatha-line mx-1 xl:mx-2" />
           
           {user ? (
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-4 xl:gap-8">
               <button 
                 onClick={() => handleLinkClick('dashboard')}
-                className={`px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-sm transition-all ${
-                  currentPage === 'dashboard' 
-                  ? 'bg-[#3E2D1F] text-white shadow-md' 
-                  : 'border border-[#3E2D1F] text-[#3E2D1F] hover:bg-[#3E2D1F] hover:text-white'
+                className={`text-[10px] xl:text-[11px] font-bold uppercase tracking-[0.2em] transition-all ${
+                  currentPage === 'dashboard' ? 'text-gaatha-accent underline underline-offset-8' : 'text-gaatha-ink/60 hover:text-gaatha-ink'
                 }`}
               >
-                {user.role} Dashboard
+                Dashboard
               </button>
               
               <button 
                 onClick={onLogout}
-                className="text-xs font-bold uppercase tracking-widest text-[#7B4A2E] hover:underline transition-colors"
+                className="text-[10px] xl:text-[11px] font-bold uppercase tracking-[0.2em] text-gaatha-red hover:opacity-70 transition-opacity"
               >
                 Logout
               </button>
@@ -75,17 +75,22 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, user, onLogout
           ) : (
             <button 
               onClick={() => handleLinkClick('login')}
-              className="bg-[#3E2D1F] text-[#F5F1EA] px-6 py-2 text-xs font-bold uppercase tracking-widest hover:bg-black transition-all rounded-sm shadow-md"
+              className="text-[10px] xl:text-[11px] font-bold uppercase tracking-[0.2em] text-gaatha-ink hover:text-gaatha-accent transition-colors flex items-center gap-2"
             >
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               Login
             </button>
           )}
+          
+          <button className="text-gaatha-ink/40 hover:text-gaatha-ink transition-colors ml-2 xl:ml-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </button>
         </nav>
 
         {/* Mobile Toggle */}
         <button 
           onClick={toggleMenu}
-          className="md:hidden p-2 text-[#3E2D1F]"
+          className="lg:hidden p-2 text-gaatha-ink"
           aria-label="Toggle Menu"
         >
           {isMenuOpen ? (
@@ -102,27 +107,37 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentPage, user, onLogout
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="md:hidden bg-[#F2E6D8] border-b border-[#D6C7B2] absolute w-full left-0 p-6 flex flex-col gap-4 shadow-xl animate-fade-in z-50">
-          <button onClick={() => handleLinkClick('art-forms')} className="text-left text-lg font-playfair text-[#3E2D1F] py-2 border-b border-black/5">
-            Art Forms
-          </button>
-          <button onClick={() => handleLinkClick('artists')} className="text-left text-lg font-playfair text-[#3E2D1F] py-2 border-b border-black/5">
-            Artists
-          </button>
+        <div className="lg:hidden bg-gaatha-bg border-b border-gaatha-line absolute w-full left-0 p-8 flex flex-col gap-6 shadow-2xl animate-fade-in z-50">
+          {['home', 'art-forms', 'artists', 'explore'].map((page) => (
+            <button 
+              key={page}
+              onClick={() => handleLinkClick(page)} 
+              className={`text-left text-sm font-bold uppercase tracking-[0.3em] py-2 border-b border-gaatha-ink/5 transition-colors ${
+                currentPage === page ? 'text-gaatha-accent' : 'text-gaatha-ink'
+              }`}
+            >
+              {page.replace('-', ' ')}
+            </button>
+          ))}
           
           {user ? (
-             <>
-               <button onClick={() => handleLinkClick('dashboard')} className="text-left text-sm font-bold uppercase tracking-widest text-[#7B4A2E] py-2">
+             <div className="flex flex-col gap-6 mt-4">
+               <button 
+                 onClick={() => handleLinkClick('dashboard')} 
+                 className={`text-left text-sm font-bold uppercase tracking-[0.3em] ${
+                   currentPage === 'dashboard' ? 'text-gaatha-accent' : 'text-gaatha-ink'
+                 }`}
+               >
                  My Dashboard
                </button>
-               <button onClick={onLogout} className="text-left text-sm font-bold uppercase tracking-widest text-[#4B3827] py-2">
+               <button onClick={onLogout} className="text-left text-sm font-bold uppercase tracking-[0.3em] text-gaatha-red">
                  Logout
                </button>
-             </>
+             </div>
           ) : (
              <button 
                onClick={() => handleLinkClick('login')} 
-               className="text-left text-sm font-bold uppercase tracking-widest text-[#3E2D1F] py-2"
+               className="text-left text-sm font-bold uppercase tracking-[0.3em] text-gaatha-ink mt-4"
              >
                Login
              </button>

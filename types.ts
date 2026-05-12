@@ -16,6 +16,34 @@ export interface ArtForm {
   image: string;
   process?: ProcessStep[];
   products?: Product[];
+  usage?: {
+    text: string;
+    images: string[];
+  };
+  significance?: {
+    text: string;
+    images?: string[];
+  };
+  lore?: {
+    text: string;
+    images?: string[];
+  };
+  history?: {
+    text: string;
+    images?: string[];
+  };
+  design?: {
+    text: string;
+    images?: string[];
+  };
+  types?: {
+    intro?: string;
+    items: {
+      title: string;
+      description: string;
+      images: string[];
+    }[];
+  };
 }
 
 export interface ProcessStep {
@@ -63,4 +91,13 @@ export interface Artisan {
   pendingChanges?: Partial<Artisan>; // Stores edits waiting for admin approval
   rejectionNote?: string; // Stores reason for latest rejection
   artworks: Artwork[];
+}
+
+export interface Story {
+  id: string;
+  title: string;
+  excerpt: string;
+  image: string;
+  category: string;
+  date: string;
 }
